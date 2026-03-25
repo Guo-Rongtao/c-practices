@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="数据类型.c">
+    <ClCompile Include="scanf()函数的用法.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
