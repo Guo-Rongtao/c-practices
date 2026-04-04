@@ -21,17 +21,23 @@ int main(){
 	if ((c >= 10) && (c <= 99)) 
 	{printf("%d", (c % 10 != 7) && (c / 10 != 7) && (c % 7 != 0));}
 	
-	//Ⅳ、三元运算符：    关系式 ？表达式1 ：表达式2 ；
+	//Ⅳ、三元运算符：    关系式 ？表达式1 ：表达式2 ；  可代替简单的if-else判断
 	int a, b, c;
 	scanf("%d%d", &a, &b);
 	printf("%d", a > b ? a : b);         //等价于max(a,b);
 	printf("%d", (a > b ? a : b) > c ? (a > b ? a : b) : c);//等价于max(a,b,c);
+	printf("%d", a > b ? a : b > c ? b : c);
+
+	int score = 85;
+	const char *level = (score >= 95) ? "A+" : (score >= 90) ? "A" : (score >= 85) ? "B+" : "B" ;
+
+	//Ⅴ、逗号运算符：
+	int i = 3;
+	printf("%d",(++i,i++,a+5));
 	
-	int a = 5;
-	printf("%d",( a + 2, ++a, a * 6));
 	
-	
-	
+	x > h ?（ z > w ? （x > z ? （x > y ? x : y） : （z）） : (w） ）:（ w > h ? w : h）;
+	x > h ?z > w ? x > z ? x > y ? x : y : z : w: w > h ? w : h;
 	
 	
 	return 0;
