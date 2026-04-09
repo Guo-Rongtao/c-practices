@@ -1,6 +1,7 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 int main() {
 
 	//1.正逆向打印数字：正向输出1~5，反向输出5~1
@@ -49,24 +50,13 @@ int main() {
 	printf("%d\n", j);
 
 	//7.整数反转：输入一个整数，将其反转，例如：123→321
-	int l, m, n = 0, rev = 0;
-	scanf("%d", &l);
-	while (l > 10) {
-		m=l % 10;
-		n++;
-		rev += m * pow(10, n);
-	}
-	printf("%d", rev);              //这是错的
-
-	
-	int num, reversed = 0;
+		int num, reversed = 0;
     printf("请输入一个整数：");
 	scanf("%d", &num);
 	// 循环反转
 	while (num != 0) {
-		int digit = num % 10;        // 取最后一位
-		reversed = reversed * 10 + digit;  // 拼接到反转数字里
-		num = num / 10;}              // 去掉最后一位
+		reversed = reversed * 10 + num % 10;  // 拼接到反转数字里
+		num /= 10;}              // 去掉最后一位
     printf("反转后的数字：%d\n", reversed);
 
 	
@@ -94,15 +84,28 @@ int main() {
 	}
 	printf("%d",p-1);
 
-	
+	int q;
+	printf("请输入一个整数：");
+	scanf("%d", &q);
+	printf("%d", sqrt(q));
 
+	//9.回文数：判断一个数正着读和倒着读是否是同一个数，如121，95159.
+	int r,s=0;
+	scanf("%d", &r);
+	int t = r;
+	while (r != 0) {
+		s = s * 10 + r % 10;
+		r / 10;
+	}
+	t == s ? printf("他是回文数") : printf("他b不是回文数");
 
-
-
-
-
-
-
-
+	//10.两数相除：要求不用乘除和取余，求两数相除得到的商和余数
+	int u, v, w=0;
+	scanf("%d %d", &u,&v);
+	while (u > v) {
+		u -= v;
+		w++;
+	}
+	printf("商是%d，余数是%d", w, u);
 	return 0;
 }
