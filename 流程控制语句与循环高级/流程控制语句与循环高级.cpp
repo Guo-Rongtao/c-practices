@@ -108,13 +108,16 @@ int main() {
 	}
 	
 	
-	 //goto ： 可以单独使用，结合标号，可跳转到任意地方，但是可读性很差
+	 //goto ： 可以单独使用，结合标号，可跳转到任意地方，可以造死循环，但是可读性很差
 	for (int i = 1;;i++) {
 		printf("AAA\n");
 		if (i == 15) goto a;
 	}
-    a: printf("跳出循环");
+a:  printf("跳出循环");
 	
+	int aaa = 1;
+b:	printf("aaa=%d", aaa++);
+	goto b;
 	
 	
 	
