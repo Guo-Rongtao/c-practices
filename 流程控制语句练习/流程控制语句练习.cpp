@@ -107,5 +107,82 @@ int main() {
 		w++;
 	}
 	printf("商是%d，余数是%d", w, u);
+	
+	//11.打印一个三行五列的'*'
+	for (int row = 1; row <= 3; row++) {
+		for (int column = 1; column <= 5; column++)	printf("*");
+		printf("\n");
+	}
+	
+	//12.打印一个五行五列的三角形
+	   //(1)倒序三角形
+	   for (int row = 5; row >= 1; row--) {
+		for (int column = 1; column <= row; column++)	printf("*");
+		printf("\n");
+	    }
+	   //(2)正序三角形
+	   for (int row = 1; row <= 5; row++) {
+		   for (int column = 1; column <= row; column++)	printf("*");
+		   printf("\n");
+	   }
+	
+	//13.打印九九乘法表
+    	
+	   for (int row = 1; row <= 9; row++) {
+		   for (int column = 1; column <= row;column++) {
+			   printf("%d * %d = %d\t", column, row, row * column);}
+           printf("\n");
+	   }
+	
+	//14.计算质数：给定一个整数，计算所有小于等于它的质数的数量
+	   int count1, quantity = 0;
+	   scanf("%d", &count1);
+
+	   if (count1 == 1) printf("质数的个数是1");
+	   else {
+		   for (int number = 1; number <= count1; number++) {        //count1是输入的整数
+																   	 //number是用以考虑从1开始到count1的所有整数
+			   int numA = 0;									   	 //num是取从1开始到number的整数
+			                                                         //numA是表示number的因数个数
+			   for (int num = 1; num <= number; num++) {
+				   if (number % num == 0) numA++;}
+			   
+			   if (numA == 2) quantity++;
+		   }
+		   printf("质数的个数是%d", quantity);
+
+	   }
+
+	//15.计算：1^1+2^2+3^3+...+10^10
+	   long long plus = 0;
+	   for (int num = 1; num <= 10; num++) {
+		   plus += pow(num, num);
+	   }
+	   printf("%lld", plus);
+	
+	//16.找出0~1000内所有满足要求的数，要求：该数每一位数字加起来和为15
+
+	   for (int i = 1; i <= 1000; i++) {
+		   int res = 0, temp = i;
+		   while (1) {
+			   res += temp % 10;
+			   temp = temp / 10;
+			   if (temp == 0) break;
+		   }
+		   if (res == 15) printf("%d ", i);
+	   }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	return 0;
 }
