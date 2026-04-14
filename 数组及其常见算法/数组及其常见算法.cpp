@@ -1,5 +1,5 @@
-﻿
-#include <stdio.h>
+﻿#include <stdio.h>
+int order1(int arr[], int len, int num);
 
 int main()
 {
@@ -54,9 +54,235 @@ int main()
 
 
 
+    
+    
+    
+    
+    
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//常见算法
+  //查找：基本查找，二分查找，插值查找，分块查找，哈希查找，鼠标查找，斐波那契查找
+    int arr1[] = { 11,22,33 }, num1 = 33;         //定义数组和要查找的变量
+    int len1 = sizeof(arr1) / sizeof(int);        
+    int index1 = order1(arr1, len1, num1);         //调用函数查找数据
+    printf("%d", index1);                         //输出索引
 
-
-
-	return 0;
+    int arr2[] = { 2,6,15,56,78 }, num1 = 33;         //定义数组和要查找的变量
+    int len2 = sizeof(arr2) / sizeof(int);
+    int index2 = BinarySearch(arr2, len1, num1);         //调用函数查找数据
+    printf("%d", index2);
+	
+    
+    
+    
+    
+    
+    return 0;
 }
+
+
+
+
+//常见算法
+  //查找：基本查找，二分查找，插值查找，分块查找，哈希查找，数表查找，斐波那契查找
+
+//基本查找（顺序查找）：
+int order1(int arr[],int len,int num) {
+    for (int i = 0; i < len; i++) {
+        if (num == arr[i]) return i;
+    }
+    return -1;
+}
+
+
+//二分查找 ： 要求数组中的数据必须是有序的，每次排除一半的范围
+int BinarySearch(int arr[],int len,int num) {
+    int min = 0, max = len - 1;
+    while  (min<=max) {
+        int mid = (min + max) / 2;
+        if (num > arr[mid]) {
+            min = mid+1;    
+        }
+        else if (num < arr[mid]) {
+            max = mid-1;      
+        }
+        else if (num == arr[mid]) return mid;
+    }
+    return -1;
+}
+
+
+//插值查找： 要求数据有序且分布尽量均匀，     若满足要求则查找效率比二分查找快，否则反而更慢
+int InterpolationSearch(int arr[], int len, int key) {
+    int min = 0, max = len - 1;
+    while (min<=max && key >= arr[min] && key <= arr[max]) {
+       int mid = min +(max-min)* (key - arr[min]) / (arr[max] - arr[min]);
+       if (key < arr[mid]) max = mid - 1;
+       else if (key > arr[mid]) min = mid + 1;
+       else return mid;
+    }
+    return -1;
+}
+
+
+
+//排序：冒泡排序，选择排序
+    //冒泡排序
+     int BubbleSort(int arr[],int len){
+         for (int i = 0;i<len-1; i++) {
+             for(int k=0;k<len-1-i; k++) {
+                 if (arr[k] > arr[k + 1]) {
+                     int temp = arr[k + 1];
+                     arr[k + 1] = arr[k];
+                     arr[k] = temp;
+                 }                 
+             }
+         }
+     }
+
+     //冒泡排序的变形：  但是效率比较低
+     int BubbleSort1(int arr[], int len) {
+         for (int i = 0; i < len - 1; i++) {
+             for (int k = 1; k <= len - 1 - i; k++) {
+                 if (arr[i] > arr[i + k]) {
+                     int temp = arr[i + k];
+                     arr[i + k] = arr[i];
+                     arr[i] = temp;
+                 }
+             }
+         }
+     }
+
+     //选择排序：
+
+     void SelectionSort(int arr[], int len) {
+         // 外层循环：确定第 i 位放最小值
+         for (int i = 0; i < len - 1; i++) {
+             int minIndex = i;  // 先假设 i 是最小值的下标
+
+             // 内层循环：从 i+1 开始找真正最小值的下标
+             for (int j = i + 1; j < len; j++) {
+                 if (arr[j] < arr[minIndex]) {
+                     minIndex = j;  // 找到更小的，记录下标
+                 }
+             }
+
+             // 【重点】一轮找完，只交换 1 次
+             int temp = arr[i];
+             arr[i] = arr[minIndex];
+             arr[minIndex] = temp;
+         }
+     }
+
+
+     
+     
+     
+     
+     
+     
+/*
+## 📝 C语言数组 - 常见的两个小问题
+
+### 问题一：数组作为函数的参数
+
+**代码示例：**
+```c
+#include<stdio.h>
+
+void printArr(int arr[]);
+
+int main()
+{
+    int arr[] = {1, 2, 3, 4, 5};
+    int len = sizeof(arr) / sizeof(arr[0]);
+    
+    printArr(arr);
+    return 0;
+}
+
+void printArr(int arr[])
+{
+    for (int i = 0; i < len; i++)  // ❌ 错误！len未定义
+    {
+        printf("%d\n", arr[i]);
+    }
+}
+```
+
+**⚠️ 常见错误：**
+- `len`是main函数的**局部变量**，在printArr函数中**无法直接访问**
+- 编译器会报错：`len`未定义
+
+**✅ 正确做法：**
+```c
+void printArr(int arr[], int len)  // 把长度也传进去
+{
+    for (int i = 0; i < len; i++)
+    {
+        printf("%d\n", arr[i]);
+    }
+}
+
+// 调用时：
+printArr(arr, len);
+```
+
+**📌 关键点：**
+- 数组作为参数传递时，**不会传递数组长度**
+- 需要额外传递数组长度参数
+
+---
+
+### 问题二：数组的索引越界
+
+**示例：**
+```c
+int arr[5] = {1, 2, 3, 4, 5};
+printf("%d", arr[5]);  // ❌ 越界！有效索引是0-4
+```
+
+**⚠️ 越界后果：**
+- 访问未分配的内存
+- 程序崩溃或数据错乱
+- 编译器不一定会报错，但运行时会出问题
+
+**✅ 注意事项：**
+- 数组索引从**0**开始
+- 最后一个元素索引是 `长度-1`
+- 循环时注意边界：`i < len`（不是 `i <= len`）
+
+---
+
+### 总结
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| 数组传参无法获取长度 | 数组传递不携带长度信息 | 额外传递长度参数 |
+| 数组越界 | 访问超出范围的索引 | 确保索引在 0~len-1 之间 |
+
+*/
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
